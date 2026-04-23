@@ -109,7 +109,10 @@ export default function App() {
             className="w-3 h-3 rounded-full bg-blue-500 glow-blue" 
           />
           <span className="font-bold tracking-tight text-lg uppercase font-mono">
-            Stability.OS <span className="text-zinc-500 font-normal ml-1 text-sm tracking-widest">v4.2.0-HYPERVISOR</span>
+                      Stability.OS
+                      &nbsp;<span className="text-zinc-500 font-normal ml-1 text-sm tracking-widest">v4.2.0-HYPERVISOR</span>
+                      &nbsp;<span className="text-blue-500 font-normal ml-1 text-lg tracking-widest">Разделяй и балансируй</span>
+                      
           </span>
         </div>
         <div className="hidden md:flex gap-8 text-[10px] uppercase tracking-widest font-semibold text-zinc-400">
@@ -215,10 +218,10 @@ export default function App() {
 
           <button 
             onClick={() => setIsAboutOpen(true)}
-            className="w-full py-2 bg-zinc-900 border border-zinc-800 rounded flex items-center justify-center gap-2 text-[8px] font-black uppercase tracking-[0.2em] text-zinc-500 hover:text-white hover:border-zinc-600 transition-all mt-auto shadow-lg"
+            className="w-full py-2 bg-zinc-900 border border-zinc-800 rounded flex items-center justify-center gap-2 text-[8px] font-black uppercase tracking-[0.2em] text-emerald-500 hover:text-white hover:border-zinc-600 transition-all mt-auto shadow-lg"
           >
             <Info size={10} />
-            System_Manifesto
+                About Stability.OS...
           </button>
         </aside>
 
@@ -516,7 +519,7 @@ export default function App() {
                     <h2 className="text-blue-500 font-mono text-[10px] font-black uppercase mb-4 tracking-[0.3em] flex items-center gap-2">
                        <span className="w-4 h-px bg-blue-500/30" /> I. Кризис Монолитной Устойчивости
                     </h2>
-                    <p className="text-sm text-zinc-300">
+                    <p className="text-sm text-zinc-400">
                       Классическая политическая мысль совершает фундаментальную ошибку, принимая "народное единство" за высшее благо. 
                       В терминах системной инженерии, монолит — это структура с бесконечным количеством внутренних связей и <span className="text-blue-400 italic">единственной точкой отказа</span>. 
                       Когда в консолидированном обществе возникает резонанс недовольства, он распространяется мгновенно, превращая локальный сбой в системный крах.
@@ -526,7 +529,7 @@ export default function App() {
                     <h2 className="text-blue-500 font-mono text-[10px] font-black uppercase mb-4 tracking-[0.3em] flex items-center gap-2">
                        <span className="w-4 h-px bg-blue-500/30" /> II. Архитектура Атомизации
                     </h2>
-                    <p className="text-sm text-zinc-300">
+                    <p className="text-sm text-zinc-400">
                        Stability.OS реализует концепцию устойчивости через <span className="text-white font-bold italic">максимизацию социальной энтропии</span>. 
                       Мы не пытаемся подавить энергию масс — мы разделяем её на миллионы изолированных векторов. 
                       Атомизация электорального пространства превращает потенциальную "волну" в "белый шум". 
@@ -537,7 +540,7 @@ export default function App() {
                     <h2 className="text-blue-500 font-mono text-[10px] font-black uppercase mb-4 tracking-[0.3em] flex items-center gap-2">
                        <span className="w-4 h-px bg-blue-500/30" /> III. Управляемое Горизонтальное Трение
                     </h2>
-                    <p className="text-sm text-zinc-300 italic">
+                    <p className="text-sm text-zinc-400">
                       Постмодернистский неомарксизм, радикальный активизм и субкультуры идентичности — это не побочные продукты свободы, а <span className="text-blue-500">модераторы трения</span>. 
                       Создавая бесконечную фрагментацию групп (по гендеру, диете, этике, потреблению), мы гарантируем, что энергия социального недовольства будет расходоваться на горизонтальные конфликты. 
                       Группы сражаются друг с другом за микро-привилегии, пока Гипервизор сохраняет стабильность всей платформы.
@@ -550,7 +553,7 @@ export default function App() {
                     <h2 className="text-blue-500 font-mono text-[10px] font-black uppercase mb-4 tracking-[0.3em] flex items-center gap-2">
                        <span className="w-4 h-px bg-blue-500/30" /> IV. Эффект Рассеивания (Financial Blur)
                     </h2>
-                    <p className="text-sm text-zinc-300">
+                    <p className="text-sm text-zinc-400">
                       Финансовое обеспечение групп является динамическим клапаном. Поддержка наиболее радикальных элементов 
                       лишь на первый взгляд кажется опасной. На деле, избыток ресурсов в радикальных нишах ускоряет 
                       их <span className="text-emerald-400">геттоизацию</span>. Группа, имеющая всё необходимое для внутреннего потребления, 
@@ -561,7 +564,7 @@ export default function App() {
                     <h2 className="text-blue-500 font-mono text-[10px] font-black uppercase mb-4 tracking-[0.3em] flex items-center gap-2">
                        <span className="w-4 h-px bg-blue-500/30" /> V. Гипервизор: Модератор Реальности
                     </h2>
-                    <p className="text-sm text-zinc-300">
+                    <p className="text-sm text-zinc-400">
                       Stability.OS не претендует на управление мыслями; она управляет <span className="text-blue-500 font-mono">friction_vectors</span>. 
                       Истинная власть в XXI веке — это не запрет, а маршрутизация. 
                       Стабильность — это термодинамическая константа, где сумма всех конфликтов и противоречий внутри системы 
