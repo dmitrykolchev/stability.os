@@ -1,20 +1,23 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+<img width="1200" height="675" alt="eagle-bw" src="https://github.com/user-attachments/assets/26500e39-90a1-4cab-9f1e-09b0c09ec59f" />
 </div>
 
-# Run and deploy your AI Studio app
+# Run and deploy your Statility.OS
 
 This contains everything you need to run your app locally.
 
-View your app in AI Studio: https://ai.studio/apps/ad5efee5-d887-4ff6-9a0e-44293e59aab4
+View your app in browser: [https://dmitrykolchev.github.io/stability.os/](https://dmitrykolchev.github.io/stability.os/)
 
 ## Run Locally
 
 **Prerequisites:**  Node.js
 
-
-1. Install dependencies:
+1. Clone repository
+   `git clone https://github.com/dmitrykolchev/stability.os.git`
+   `cd stability.os`
+3. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
+4. Run the app:
    `npm run dev`
+
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/0da9088b-6fd0-4ccf-afd7-e1434f6c8da7" />
