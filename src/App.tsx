@@ -519,7 +519,7 @@ export default function App() {
                     <h2 className="text-blue-500 font-mono text-[10px] font-black uppercase mb-4 tracking-[0.3em] flex items-center gap-2">
                        <span className="w-4 h-px bg-blue-500/30" /> I. Кризис Монолитной Устойчивости
                     </h2>
-                    <p className="text-sm text-zinc-400">
+                                        <p className="text-sm text-zinc-300">
                       Классическая политическая мысль совершает фундаментальную ошибку, принимая "народное единство" за высшее благо. 
                       В терминах системной инженерии, монолит — это структура с бесконечным количеством внутренних связей и <span className="text-blue-400 italic">единственной точкой отказа</span>. 
                       Когда в консолидированном обществе возникает резонанс недовольства, он распространяется мгновенно, превращая локальный сбой в системный крах.
