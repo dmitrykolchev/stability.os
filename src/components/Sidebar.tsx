@@ -8,13 +8,14 @@ interface SidebarProps {
     viewMode: ViewMode;
     setViewMode: (mode: ViewMode) => void;
     setIsAboutOpen: (open: boolean) => void;
+    lang: 'ru' | 'en';
 }
 
-export function Sidebar({ activeProtocol, setActiveProtocol, viewMode, setViewMode, setIsAboutOpen }: SidebarProps) {
+export function Sidebar({ activeProtocol, setActiveProtocol, viewMode, setViewMode, setIsAboutOpen, lang }: SidebarProps) {
     return (
         <aside className="w-72 border-r border-zinc-800 bg-zinc-950 p-6 flex flex-col gap-8 shrink-0 overflow-y-auto">
             <div>
-                <h3 className="text-[10px] uppercase text-zinc-500 font-bold mb-4 tracking-[0.2em]">Active Protocols</h3>
+                <h3 className="text-[10px] uppercase text-zinc-500 font-bold mb-4 tracking-[0.2em]">{lang === 'ru' ? 'Активные Протоколы' : 'Active Protocols'}</h3>
                 <div className="space-y-3">
                     {PROTOCOLS.map((p) => (
                         <button
@@ -27,7 +28,7 @@ export function Sidebar({ activeProtocol, setActiveProtocol, viewMode, setViewMo
                         >
                             <div className="flex items-center justify-between font-medium mb-1 relative z-10">
                                 <span className={`text-sm tracking-tight ${activeProtocol === p.id ? 'text-white' : 'text-zinc-400'}`}>
-                                    {p.name}
+                                    {lang === 'ru' ? (p.id === 'frag' ? 'Управляемая Фрагментация' : p.id === 'unity' ? 'Национальное Единство' : 'Снижение Размерности') : p.name}
                                 </span>
                                 <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider ${activeProtocol === p.id
                                         ? 'bg-blue-500 text-white'
@@ -39,7 +40,11 @@ export function Sidebar({ activeProtocol, setActiveProtocol, viewMode, setViewMo
                                 </span>
                             </div>
                             <p className={`text-[10px] leading-tight relative z-10 ${activeProtocol === p.id ? 'text-blue-400/80' : 'text-zinc-600'}`}>
-                                {p.description}
+                                {lang === 'ru' ? (
+                                    p.id === 'frag' ? 'Горизонтальная маршрутизация общественных трений.' :
+                                    p.id === 'unity' ? 'Рискованная монолитная архитектура.' :
+                                    'Упрощение переменных состояния общества.'
+                                ) : p.description}
                             </p>
                         </button>
                     ))}
@@ -47,12 +52,12 @@ export function Sidebar({ activeProtocol, setActiveProtocol, viewMode, setViewMo
             </div>
 
             <div>
-                <h3 className="text-[10px] uppercase text-zinc-500 font-bold mb-4 tracking-[0.2em]">Matrix Mode</h3>
+                <h3 className="text-[10px] uppercase text-zinc-500 font-bold mb-4 tracking-[0.2em]">{lang === 'ru' ? 'Режим Матрицы' : 'Matrix Mode'}</h3>
                 <div className="grid grid-cols-1 gap-2">
                     {[
-                        { id: 'matrix', label: 'Entropy Matrix', icon: Layers },
-                        { id: 'vectors', label: 'Friction Vectors', icon: Network },
-                        { id: 'resource', label: 'Resource Gradient', icon: Server },
+                        { id: 'matrix', label: lang === 'ru' ? 'Матрица Энтропии' : 'Entropy Matrix', icon: Layers },
+                        { id: 'vectors', label: lang === 'ru' ? 'Векторы Трения' : 'Friction Vectors', icon: Network },
+                        { id: 'resource', label: lang === 'ru' ? 'Градиент Ресурсов' : 'Resource Gradient', icon: Server },
                     ].map((mode) => (
                         <button
                             key={mode.id}
@@ -70,11 +75,11 @@ export function Sidebar({ activeProtocol, setActiveProtocol, viewMode, setViewMo
             </div>
 
             <div className="p-4 bg-zinc-950/60 rounded-xl border border-zinc-800/80">
-                <h4 className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-3">Model Parameters</h4>
+                <h4 className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-3">{lang === 'ru' ? 'Параметры Модели' : 'Model Parameters'}</h4>
                 <div className="space-y-4">
                     <div>
                         <div className="flex justify-between text-[8px] font-mono text-zinc-400 mb-1">
-                            <span>ATOMIZATION</span>
+                            <span>{lang === 'ru' ? 'АТОМИЗАЦИЯ' : 'ATOMIZATION'}</span>
                             <span>0.98</span>
                         </div>
                         <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
@@ -83,8 +88,8 @@ export function Sidebar({ activeProtocol, setActiveProtocol, viewMode, setViewMo
                     </div>
                     <div>
                         <div className="flex justify-between text-[8px] font-mono text-zinc-400 mb-1 text-red-500">
-                            <span>RESISTANCE_FLUX</span>
-                            <span>LOW</span>
+                            <span>{lang === 'ru' ? 'ПОТОК_СОПРОТИВЛЕНИЯ' : 'RESISTANCE_FLUX'}</span>
+                            <span>{lang === 'ru' ? 'НИЗКИЙ' : 'LOW'}</span>
                         </div>
                         <div className="h-1 bg-zinc-800 rounded-full overflow-hidden">
                             <div className="h-full bg-red-500 w-[8%]" />
@@ -98,7 +103,7 @@ export function Sidebar({ activeProtocol, setActiveProtocol, viewMode, setViewMo
                 className="w-full py-2 bg-zinc-900 border border-zinc-800 rounded flex items-center justify-center gap-2 text-[8px] font-black uppercase tracking-[0.2em] text-emerald-500 hover:text-white hover:border-zinc-600 transition-all mt-auto shadow-lg"
             >
                 <Info size={10} />
-                About Stability.OS...
+                {lang === 'ru' ? 'О Stability.OS...' : 'About Stability.OS...'}
             </button>
         </aside>
     );

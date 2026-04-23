@@ -15,6 +15,7 @@ import { Cluster, ViewMode } from './types';
 import { INITIAL_CLUSTERS, INITIAL_LOGS } from './constants';
 
 export default function App() {
+    const [lang, setLang] = useState<'ru' | 'en'>('ru');
     const [activeProtocol, setActiveProtocol] = useState('frag');
     const [entropy, setEntropy] = useState(0.82);
     const [logs, setLogs] = useState(INITIAL_LOGS);
@@ -30,14 +31,14 @@ export default function App() {
         setLastProtocol(activeProtocol);
         
         let msg = "";
-        if (activeProtocol === 'unity') msg = "CRIT: Monolith integrity check FAILED. Convergence vulnerability detected.";
-        if (activeProtocol === 'dim_red') msg = "INF: Collapsing social dimensions. State space simplified.";
-        if (activeProtocol === 'frag') msg = "AUTH: Managed Fragmentation verified. Dissipation vectors nominal.";
+        if (activeProtocol === 'unity') msg = lang === 'ru' ? "КРИТ: Ошибка проверки целостности монолита. Обнаружена уязвимость конвергенции." : "CRIT: Monolith integrity check FAILED. Convergence vulnerability detected.";
+        if (activeProtocol === 'dim_red') msg = lang === 'ru' ? "ИНФ: Схлопывание социальных измерений. Упрощение пространства состояний." : "INF: Collapsing social dimensions. State space simplified.";
+        if (activeProtocol === 'frag') msg = lang === 'ru' ? "АУТ: Управляемая фрагментация подтверждена. Векторы диссипации в норме." : "AUTH: Managed Fragmentation verified. Dissipation vectors nominal.";
         
         if (msg) {
             setLogs(prev => [...prev.slice(-12), msg]);
         }
-    }, [activeProtocol, lastProtocol]);
+    }, [activeProtocol, lastProtocol, lang]);
 
     // Dynamic stability calculation logic
     useEffect(() => {
@@ -57,14 +58,17 @@ export default function App() {
             });
 
             if (Math.random() > 0.8) {
+                const logMsg = lang === 'ru' 
+                    ? `SIM_TICK: Пересчет векторов трения для ${clusters.length} активных узлов. Резонанс_кластера: ${(targetEntropy).toFixed(4)}`
+                    : `SIM_TICK: Recalculating friction vectors for ${clusters.length} active nodes. Cluster_Resonance: ${(targetEntropy).toFixed(4)}`;
                 setLogs(prev => [
                     ...prev.slice(-10),
-                    `SIM_TICK: Recalculating friction vectors for ${clusters.length} active nodes. Cluster_Resonance: ${(targetEntropy).toFixed(4)}`,
+                    logMsg,
                 ]);
             }
         }, 1000);
         return () => clearInterval(interval);
-    }, [clusters]);
+    }, [clusters, lang]);
 
     const updateCluster = (id: string, updates: Partial<Cluster>) => {
         setClusters(prev => prev.map(c => c.id === id ? { ...c, ...updates } : c));
@@ -74,7 +78,7 @@ export default function App() {
 
     return (
         <div className="h-screen w-screen flex flex-col overflow-hidden bg-[#09090b] text-zinc-100 font-sans select-none">
-            <Header entropy={entropy} />
+            <Header entropy={entropy} lang={lang} setLang={setLang} />
 
             <div className="flex-1 flex overflow-hidden">
                 <Sidebar 
@@ -83,6 +87,7 @@ export default function App() {
                     viewMode={viewMode}
                     setViewMode={setViewMode}
                     setIsAboutOpen={setIsAboutOpen}
+                    lang={lang}
                 />
 
                 <main className="flex-1 p-8 flex flex-col gap-8 bg-gradient-to-br from-[#09090b] to-[#0c0c0e] overflow-hidden">
@@ -92,18 +97,18 @@ export default function App() {
                             <div className="flex items-center gap-4 mt-1">
                                 <div className="flex items-center gap-2 text-[10px] text-emerald-500 font-bold uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                                     <Activity size={10} />
-                                    Live_Dissipation: Active
+                                    {lang === 'ru' ? 'Диссипация: Активна' : 'Live_Dissipation: Active'}
                                 </div>
-                                <div className="text-[10px] text-zinc-500 font-mono">ENVIRONMENT: SIMULATED_SOCIETY_v4</div>
+                                <div className="text-[10px] text-zinc-500 font-mono">{lang === 'ru' ? 'СРЕДА: СИМУЛИРОВАННОЕ_ОБЩЕСТВО_v4' : 'ENVIRONMENT: SIMULATED_SOCIETY_v4'}</div>
                             </div>
                         </div>
                         <div className="flex gap-4 p-2 bg-zinc-900/50 border border-zinc-800 rounded-lg backdrop-blur-sm">
                             <div className="px-4 border-r border-zinc-800 text-center">
-                                <div className="text-[8px] text-zinc-500 uppercase font-black tracking-[0.2em] mb-1">Societal_Equilibrium</div>
+                                <div className="text-[8px] text-zinc-500 uppercase font-black tracking-[0.2em] mb-1">{lang === 'ru' ? 'Баланс_Общества' : 'Societal_Equilibrium'}</div>
                                 <div className="text-lg font-mono text-white">{(entropy).toFixed(4)}</div>
                             </div>
                             <div className="px-4 text-center">
-                                <div className="text-[8px] text-zinc-500 uppercase font-black tracking-[0.2em] mb-1 font-mono">Nodes_Active</div>
+                                <div className="text-[8px] text-zinc-500 uppercase font-black tracking-[0.2em] mb-1 font-mono">{lang === 'ru' ? 'Активные_узлы' : 'Nodes_Active'}</div>
                                 <div className="text-lg font-mono text-blue-500">4 / 4</div>
                             </div>
                         </div>
@@ -116,12 +121,14 @@ export default function App() {
                             clusters={clusters}
                             selectedCluster={selectedCluster}
                             setSelectedCluster={setSelectedCluster}
+                            lang={lang}
                         />
 
                         <GroupModulator 
                             selectedData={selectedData}
                             setSelectedCluster={setSelectedCluster}
                             updateCluster={updateCluster}
+                            lang={lang}
                         />
                     </div>
                 </main>
@@ -130,9 +137,11 @@ export default function App() {
             <ManifestoOverlay 
                 isOpen={isAboutOpen}
                 onClose={() => setIsAboutOpen(false)}
+                lang={lang}
+                setLang={setLang}
             />
 
-            <Footer />
+            <Footer lang={lang} />
         </div>
     );
 }

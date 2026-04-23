@@ -6,16 +6,17 @@ interface GroupModulatorProps {
     selectedData: Cluster | undefined;
     setSelectedCluster: (id: string | null) => void;
     updateCluster: (id: string, updates: Partial<Cluster>) => void;
+    lang: 'ru' | 'en';
 }
 
-export function GroupModulator({ selectedData, setSelectedCluster, updateCluster }: GroupModulatorProps) {
+export function GroupModulator({ selectedData, setSelectedCluster, updateCluster, lang }: GroupModulatorProps) {
     return (
         <section className="w-80 flex flex-col gap-6 shrink-0 h-full">
             <div className="bg-zinc-900/20 border border-zinc-800/80 rounded-3xl p-6 backdrop-blur-md shadow-2xl flex-1 flex flex-col overflow-hidden">
                 <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center gap-2">
                         <Zap size={14} className="text-amber-500" />
-                        <h3 className="text-[10px] font-bold text-zinc-100 uppercase tracking-[0.2em]">Group Modulator</h3>
+                        <h3 className="text-[10px] font-bold text-zinc-100 uppercase tracking-[0.2em]">{lang === 'ru' ? 'Модулятор Групп' : 'Group Modulator'}</h3>
                     </div>
                     <div className="text-[8px] text-zinc-600 font-mono">STATUS: CMD_READY</div>
                 </div>
@@ -30,7 +31,7 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
                             className="flex-1 flex flex-col"
                         >
                             <div className="mb-8">
-                                <div className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-1">Target Cluster</div>
+                                <div className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-1">{lang === 'ru' ? 'Целевой Кластер' : 'Target Cluster'}</div>
                                 <h4 className="text-xl font-black text-white">{selectedData.name}</h4>
                                 <div className="text-[9px] font-mono text-zinc-600 mt-1 uppercase">Object_ID: {selectedData.id}</div>
                             </div>
@@ -40,7 +41,7 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
                                     <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest">
                                         <div className="flex items-center gap-2">
                                             <RefreshCcw size={12} className="text-zinc-500" />
-                                            Financial_Allocation
+                                            {lang === 'ru' ? 'Fin_Распределение' : 'Financial_Allocation'}
                                         </div>
                                         <span className="text-blue-500 font-mono">{selectedData.funding}%</span>
                                     </div>
@@ -51,7 +52,9 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
                                         className="w-full h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
                                     />
                                     <p className="text-[9px] text-zinc-600 leading-tight">
-                                        * Increasing resource flow to radical groups reduces global stability but increases atomization in local segments.
+                                        {lang === 'ru' 
+                                            ? '* Увеличение ресурсов радикальным группам снижает общую стабильность, но усиливает атомизацию в локальных сегментах.' 
+                                            : '* Increasing resource flow to radical groups reduces global stability but increases atomization in local segments.'}
                                     </p>
                                 </div>
 
@@ -59,7 +62,7 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
                                     <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest">
                                         <div className="flex items-center gap-2">
                                             <Shield size={12} className="text-zinc-500" />
-                                            Political_Leverage
+                                            {lang === 'ru' ? 'Pol_Влияние' : 'Political_Leverage'}
                                         </div>
                                         <span className="text-emerald-500 font-mono">{selectedData.leverage}%</span>
                                     </div>
@@ -70,21 +73,23 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
                                         className="w-full h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                                     />
                                     <p className="text-[9px] text-zinc-600 leading-tight">
-                                        * Political legacy support buffers against vertical mobilization but creates "Monolith Risks" if exceeding 70%.
+                                        {lang === 'ru' 
+                                            ? '* Поддержка политического влияния защищает от вертикальной мобилизации, но создает риски "Монолита" при превышении 70%.' 
+                                            : '* Political legacy support buffers against vertical mobilization but creates "Monolith Risks" if exceeding 70%.'}
                                     </p>
                                 </div>
                             </div>
 
                             <div className="mt-8 pt-8 border-t border-zinc-800 bg-zinc-950/20 -mx-6 px-6 pb-6">
                                 <div className="flex justify-between items-center mb-4">
-                                    <span className="text-[9px] font-black uppercase text-zinc-500">Calculated Friction</span>
-                                    <span className="text-[9px] font-mono text-emerald-500">OPTIMIZED</span>
+                                    <span className="text-[9px] font-black uppercase text-zinc-500">{lang === 'ru' ? 'Вычисленное Трение' : 'Calculated Friction'}</span>
+                                    <span className="text-[9px] font-mono text-emerald-500 uppercase">{lang === 'ru' ? 'ОПТИМИЗИРОВАНО' : 'OPTIMIZED'}</span>
                                 </div>
                                 <button
                                     onClick={() => setSelectedCluster(null)}
                                     className="w-full py-4 border border-zinc-800 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] hover:bg-zinc-800 transition-colors"
                                 >
-                                    Reset Target Selection
+                                    {lang === 'ru' ? 'Сбросить Выбор Цели' : 'Reset Target Selection'}
                                 </button>
                             </div>
                         </motion.div>
@@ -99,7 +104,9 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
                                 <ChevronRight size={32} className="text-zinc-600" />
                             </div>
                             <p className="text-[11px] text-zinc-500 font-medium leading-relaxed">
-                                Select a cluster from the Stability Matrix to begin modulation and simulate resource redirection.
+                                {lang === 'ru' 
+                                    ? 'Выберите кластер в Матрице Стабильности, чтобы начать модуляцию и симуляцию перераспределения ресурсов.' 
+                                    : 'Select a cluster from the Stability Matrix to begin modulation and simulate resource redirection.'}
                             </p>
                         </motion.div>
                     )}
@@ -109,7 +116,7 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
             <div className="bg-zinc-900/10 border border-zinc-800/80 rounded-3xl p-6 backdrop-blur-md">
                 <div className="flex items-center gap-2 mb-4">
                     <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                    <h4 className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">Dissipative Health</h4>
+                    <h4 className="text-[10px] font-black uppercase text-zinc-400 tracking-widest">{lang === 'ru' ? 'Здоровье Системы' : 'Dissipative Health'}</h4>
                 </div>
                 <div className="h-12 flex items-end gap-1">
                     {Array.from({ length: 12 }).map((_, i) => (

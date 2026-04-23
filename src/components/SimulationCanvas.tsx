@@ -8,19 +8,20 @@ interface SimulationCanvasProps {
     clusters: Cluster[];
     selectedCluster: string | null;
     setSelectedCluster: (id: string | null) => void;
+    lang: 'ru' | 'en';
 }
 
-export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedCluster, setSelectedCluster }: SimulationCanvasProps) {
+export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedCluster, setSelectedCluster, lang }: SimulationCanvasProps) {
     return (
         <section className="flex-1 bg-zinc-900/10 border border-zinc-800/60 rounded-3xl flex flex-col relative overflow-hidden backdrop-blur-md shadow-2xl group">
             {/* Matrix Header */}
-            <div className="absolute top-0 inset-x-0 h-10 border-b border-zinc-800/40 bg-zinc-950/40 flex items-center justify-between px-6 z-20 backdrop-blur-md">
+            <div className="absolute top-0 inset-x-0 h-10 border-b border-zinc-800/40 bg-zinc-950/40 flex items-center justify-between px-6 z-50 backdrop-blur-md">
                 <div className="flex items-center gap-6">
                     <div className="text-[9px] text-zinc-400 font-bold flex items-center gap-2 font-mono">
                         <span className="w-1.5 h-1.5 bg-blue-500 rounded-full glow-blue" />
-                        SIM_FRAME: 24,901
+                        {lang === 'ru' ? 'КАДР_СИМ' : 'SIM_FRAME'}: 24,901
                     </div>
-                    <div className="text-[9px] text-zinc-600 font-mono">X,Y TELEMETRY ENABLED</div>
+                    <div className="text-[9px] text-zinc-600 font-mono">{lang === 'ru' ? 'ТЕЛЕМЕТРИЯ X,Y ВКЛЮЧЕНА' : 'X,Y TELEMETRY ENABLED'}</div>
                 </div>
                 <div className="flex items-center gap-3">
                     <div className="w-32 h-2 bg-zinc-800 rounded-full overflow-hidden flex">
@@ -28,7 +29,7 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                         <div className="h-full bg-emerald-500/50 w-1/4" />
                         <div className="h-full bg-amber-500/50 w-1/5" />
                     </div>
-                    <span className="text-[8px] text-zinc-600 font-black uppercase">Flux_Capacity</span>
+                    <span className="text-[8px] text-zinc-600 font-black uppercase">{lang === 'ru' ? 'Емкость_Потока' : 'Flux_Capacity'}</span>
                 </div>
             </div>
 
@@ -87,10 +88,12 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                             >
                                 <AlertTriangle size={32} className="text-red-500 animate-pulse" />
                                 <span className="text-red-500 font-mono text-lg font-black uppercase tracking-[0.4em]">
-                                    CRITICAL_RISK: MONOLITH_PROTOCOL
+                                    {lang === 'ru' ? 'КРИТИЧЕСКИЙ_РИСК: ПРОТОКОЛ_МОНОЛИТ' : 'CRITICAL_RISK: MONOLITH_PROTOCOL'}
                                 </span>
                                 <span className="text-red-500/60 font-mono text-[8px] uppercase tracking-widest text-center">
-                                    Unity detected. Fragmentation integrity compromised.<br />System instability approaching terminal value.
+                                    {lang === 'ru' 
+                                        ? 'Единство обнаружено. Целостность фрагментации нарушена. Системная нестабильность приближается к критическому значению.'
+                                        : 'Unity detected. Fragmentation integrity compromised. System instability approaching terminal value.'}
                                 </span>
                             </motion.div>
                             <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -120,7 +123,7 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                             }} />
                             <div className="absolute top-12 left-6 p-2 bg-emerald-500/10 border border-emerald-500/20 rounded flex items-center gap-2">
                                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
-                                <span className="text-emerald-500 font-mono text-[8px] font-black uppercase">Low_Dimension_Mapping: ON</span>
+                                <span className="text-emerald-500 font-mono text-[8px] font-black uppercase">{lang === 'ru' ? 'Картирование_Низкой_Размерности: ВКЛ' : 'Low_Dimension_Mapping: ON'}</span>
                             </div>
                         </motion.div>
                     )}
@@ -138,20 +141,20 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                     // Diameter set by Radius range [10, 150] -> Diameter [20, 300]
                     const nodeSize = 20 + (c.leverage / 100) * 280;
                     const fundingFactor = c.funding / 100;
-
+                    
                     return (
                         <motion.div
                             key={c.id}
                             onClick={() => setSelectedCluster(selectedCluster === c.id ? null : c.id)}
-                            style={{
-                                left: c.x,
+                            style={{ 
+                                left: c.x, 
                                 top: c.y,
                                 position: 'absolute',
                                 zIndex: 30
                             }}
-                            animate={{
-                                x: [0, (Math.random() - 0.5) * 15, 0],
-                                y: [0, (Math.random() - 0.5) * 15, 0]
+                            animate={{ 
+                                x: [0, (Math.random() - 0.5) * 15, 0], 
+                                y: [0, (Math.random() - 0.5) * 15, 0] 
                             }}
                             transition={{ duration: 12 + Math.random() * 6, repeat: Infinity, ease: "easeInOut" }}
                             className="group/node cursor-pointer"
@@ -165,10 +168,11 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                             style={{
                                                 width: `${c.funding * 4}px`,
                                                 height: `${c.funding * 4}px`,
-                                                background: `radial-gradient(circle, ${c.color === 'emerald' ? 'rgba(16,185,129,0.25)' :
-                                                        c.color === 'red' ? 'rgba(239,68,68,0.25)' :
-                                                            c.color === 'amber' ? 'rgba(245,158,11,0.25)' : 'rgba(59,130,246,0.25)'
-                                                    } 0%, transparent 70%)`,
+                                                background: `radial-gradient(circle, ${
+                                                    c.color === 'emerald' ? 'rgba(16,185,129,0.25)' : 
+                                                    c.color === 'red' ? 'rgba(239,68,68,0.25)' : 
+                                                    c.color === 'amber' ? 'rgba(245,158,11,0.25)' : 'rgba(59,130,246,0.25)'
+                                                } 0%, transparent 70%)`,
                                                 position: 'absolute',
                                                 left: 0,
                                                 top: 0,
@@ -177,17 +181,17 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                             className="rounded-full blur-3xl opacity-40"
                                         />
                                         <motion.div
-                                            animate={{
-                                                scale: [1, 2.2],
-                                                opacity: [0, 0.25, 0]
+                                            animate={{ 
+                                                scale: [1, 2.2], 
+                                                opacity: [0, 0.25, 0] 
                                             }}
-                                            transition={{
-                                                duration: 4,
+                                            transition={{ 
+                                                duration: 4, 
                                                 repeat: Infinity,
                                                 ease: "linear"
                                             }}
-                                            style={{
-                                                width: `${nodeSize * 1.6}px`,
+                                            style={{ 
+                                                width: `${nodeSize * 1.6}px`, 
                                                 height: `${nodeSize * 1.6}px`,
                                                 position: 'absolute',
                                                 left: 0,
@@ -204,8 +208,8 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                 <motion.div
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 15 - fundingFactor * 12, repeat: Infinity, ease: "linear" }}
-                                    style={{
-                                        width: `${nodeSize + 16}px`,
+                                    style={{ 
+                                        width: `${nodeSize + 16}px`, 
                                         height: `${nodeSize + 16}px`,
                                         opacity: 0.1 + fundingFactor * 0.4,
                                         position: 'absolute',
@@ -214,18 +218,19 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                         x: "-50%",
                                         y: "-50%"
                                     }}
-                                    className={`rounded-full border border-dashed flex-shrink-0 aspect-square ${c.color === 'blue' ? 'border-blue-400' :
-                                            c.color === 'amber' ? 'border-amber-400' :
-                                                c.color === 'red' ? 'border-red-400' : 'border-emerald-400'
-                                        }`}
+                                    className={`rounded-full border border-dashed flex-shrink-0 aspect-square ${
+                                        c.color === 'blue' ? 'border-blue-400' : 
+                                        c.color === 'amber' ? 'border-amber-400' : 
+                                        c.color === 'red' ? 'border-red-400' : 'border-emerald-400'
+                                    }`}
                                 />
 
                                 {/* Core Pulse */}
-                                <motion.div
-                                    style={{
-                                        width: `${nodeSize}px`,
+                                <motion.div 
+                                    style={{ 
+                                        width: `${nodeSize}px`, 
                                         height: `${nodeSize}px`,
-                                        boxShadow: selectedCluster === c.id
+                                        boxShadow: selectedCluster === c.id 
                                             ? `0 0 ${30 + fundingFactor * 40}px ${c.color === 'blue' ? 'rgba(37,99,235,0.6)' : c.color === 'amber' ? 'rgba(217,119,6,0.6)' : c.color === 'red' ? 'rgba(220,38,38,0.6)' : 'rgba(5,150,105,0.6)'}`
                                             : `0 0 ${fundingFactor * 20}px ${c.color === 'blue' ? 'rgba(37,99,235,0.4)' : c.color === 'amber' ? 'rgba(217,119,6,0.4)' : c.color === 'red' ? 'rgba(220,38,38,0.4)' : 'rgba(5,150,105,0.4)'}`,
                                         position: 'absolute',
@@ -235,26 +240,28 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                         y: "-50%"
                                     }}
                                     whileHover={{ scale: 1.05 }}
-                                    className={`rounded-full border-2 border-white/20 z-10 transition-all duration-500 flex-shrink-0 aspect-square pointer-events-auto ${selectedCluster === c.id ? 'border-white' : ''
-                                        } ${c.color === 'blue' ? 'bg-blue-600' :
-                                            c.color === 'amber' ? 'bg-amber-600' :
-                                                c.color === 'red' ? 'bg-red-600' : 'bg-emerald-600'
-                                        }`}
+                                    className={`rounded-full border-2 border-white/20 z-10 transition-all duration-500 flex-shrink-0 aspect-square pointer-events-auto ${
+                                        selectedCluster === c.id ? 'border-white' : ''
+                                    } ${
+                                        c.color === 'blue' ? 'bg-blue-600' : 
+                                        c.color === 'amber' ? 'bg-amber-600' : 
+                                        c.color === 'red' ? 'bg-red-600' : 'bg-emerald-600'
+                                    }`} 
                                 />
 
                                 {/* Diverging Ring */}
                                 <motion.div
-                                    animate={{
-                                        scale: [1, 2.5],
-                                        opacity: [0, 0.35, 0]
+                                    animate={{ 
+                                        scale: [1, 2.5], 
+                                        opacity: [0, 0.35, 0] 
                                     }}
-                                    transition={{
-                                        duration: 3,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
+                                    transition={{ 
+                                        duration: 3, 
+                                        repeat: Infinity, 
+                                        ease: "easeInOut" 
                                     }}
-                                    style={{
-                                        width: `${nodeSize}px`,
+                                    style={{ 
+                                        width: `${nodeSize}px`, 
                                         height: `${nodeSize}px`,
                                         position: 'absolute',
                                         left: 0,
@@ -262,21 +269,23 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                         x: "-50%",
                                         y: "-50%"
                                     }}
-                                    className={`rounded-full flex-shrink-0 aspect-square z-0 ${c.color === 'blue' ? 'bg-blue-500' :
-                                            c.color === 'amber' ? 'bg-amber-500' :
-                                                c.color === 'red' ? 'bg-red-500' : 'bg-emerald-500'
-                                        }`}
+                                    className={`rounded-full flex-shrink-0 aspect-square z-0 ${
+                                        c.color === 'blue' ? 'bg-blue-500' : 
+                                        c.color === 'amber' ? 'bg-amber-500' : 
+                                        c.color === 'red' ? 'bg-red-500' : 'bg-emerald-500'
+                                    }`}
                                 />
 
                                 {/* Label */}
-                                <div
+                                <div 
                                     className="absolute whitespace-nowrap z-20 pointer-events-none"
                                     style={{ top: `calc(${nodeSize / 2}px + 12px)`, left: '0', transform: 'translateX(-50%)' }}
                                 >
-                                    <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded shadow-xl border transition-colors duration-300 ${selectedCluster === c.id
-                                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'
+                                    <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded shadow-xl border transition-colors duration-300 ${
+                                        selectedCluster === c.id 
+                                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' 
                                             : 'bg-zinc-950/80 border-zinc-800 text-zinc-500 group-hover/node:text-zinc-300'
-                                        }`}>
+                                    }`}>
                                         {c.name}
                                     </span>
                                 </div>
@@ -286,10 +295,10 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                 })}
 
                 {/* Floating Meta Data */}
-                <div className="absolute bottom-8 left-8 flex flex-col gap-3 pointer-events-none max-w-[280px]">
+                <div className="absolute bottom-8 left-8 flex flex-col gap-3 pointer-events-none max-w-[280px] z-50">
                     <div className="p-4 bg-zinc-950/90 border border-zinc-800 rounded-2xl backdrop-blur-xl shadow-2xl">
                         <div className="text-[8px] font-black text-blue-500 uppercase tracking-widest mb-3 flex items-center justify-between">
-                            Sim_Terminal_Output
+                            {lang === 'ru' ? 'Терминал_Симуляции' : 'Sim_Terminal_Output'}
                             <div className="flex gap-1">
                                 <div className="w-1 h-1 bg-blue-500 rounded-full animate-ping" />
                                 <div className="w-1 h-1 bg-blue-500 rounded-full" />
@@ -297,23 +306,23 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                         </div>
                         <div className="font-mono text-[8px] text-zinc-500 space-y-1">
                             <div className="flex gap-2">
-                                <span className="text-zinc-700">INF:</span> Friction efficiency at 92.4%
+                                <span className="text-zinc-700">INF:</span> {lang === 'ru' ? 'Эффективность трения: 92.4%' : 'Friction efficiency at 92.4%'}
                             </div>
                             <div className="flex gap-2">
-                                <span className="text-zinc-700">INF:</span> Equilibrium maintained.
+                                <span className="text-zinc-700">INF:</span> {lang === 'ru' ? 'Равновесие поддерживается.' : 'Equilibrium maintained.'}
                             </div>
                             <div className="flex gap-2">
-                                <span className="text-zinc-700">CMD:</span> Adjusting dissipation vectors.
+                                <span className="text-zinc-700">CMD:</span> {lang === 'ru' ? 'Корректировка векторов диссипации.' : 'Adjusting dissipation vectors.'}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="absolute bottom-8 right-8 text-[8px] font-mono p-4 bg-zinc-950/90 border border-zinc-800 rounded-2xl text-zinc-600 space-y-1 backdrop-blur-xl">
-                    <div className="text-blue-500/50 mb-2 uppercase font-black tracking-widest">Global_Variables</div>
-                    <div>FRICTION_RATIO: 1:1.042</div>
-                    <div>DISSIPATION: ENABLED</div>
-                    <div>FEEDBACK_LOOP: SHIELDED</div>
+                <div className="absolute bottom-8 right-8 text-[8px] font-mono p-4 bg-zinc-950/90 border border-zinc-800 rounded-2xl text-zinc-600 space-y-1 backdrop-blur-xl z-50">
+                    <div className="text-blue-500/50 mb-2 uppercase font-black tracking-widest">{lang === 'ru' ? 'Глобальные_Переменные' : 'Global_Variables'}</div>
+                    <div>{lang === 'ru' ? 'КОЭФФИЦИЕНТ_ТРЕНИЯ' : 'FRICTION_RATIO'}: 1:1.042</div>
+                    <div>{lang === 'ru' ? 'ДИССИПАЦИЯ: ВКЛЮЧЕНА' : 'DISSIPATION: ENABLED'}</div>
+                    <div>{lang === 'ru' ? 'ОГРАНИЧЕНИЕ_ОБРАТНОЙ_СВЯЗИ: ВКЛ' : 'FEEDBACK_LOOP: SHIELDED'}</div>
                 </div>
             </motion.div>
         </section>
