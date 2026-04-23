@@ -21,9 +21,13 @@ View your app in browser: [https://dmitrykolchev.github.io/stability.os/](https:
    ```
    npm install
    ```
-4. Run the app:
+3. Run the app:
    ```
    npm run dev
+   ```
+4. Open link in browser
+   ```
+   http://localhost:3000/stability.os/
    ```
 
 <img width="1200" alt="image" src="https://github.com/user-attachments/assets/5a7d08f7-e6d5-4fcd-b0fa-6bf89bc49061" />
