@@ -243,7 +243,7 @@ export default function App() {
 
                     <div className="flex justify-between items-end shrink-0">
                         <div>
-                            <h2 className="text-3xl font-black tracking-tighter text-white uppercase italic">Hypervisor View: <span className="text-blue-500 font-mono">0x042</span></h2>
+                            <h2 className="text-3xl font-black tracking-tighter text-white uppercase">Hypervisor View: <span className="text-blue-500 font-mono">0x042</span></h2>
                             <div className="flex items-center gap-4 mt-1">
                                 <div className="flex items-center gap-2 text-[10px] text-emerald-500 font-bold uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
                                     <Activity size={10} />
@@ -394,7 +394,7 @@ export default function App() {
                                                 backgroundImage: 'repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,1) 3px, rgba(0,0,0,1) 4px)',
                                                 backgroundSize: '100% 4px'
                                             }} />
-                                            <div className="absolute top-4 left-4 p-2 bg-emerald-500/10 border border-emerald-500/20 rounded flex items-center gap-2">
+                                            <div className="absolute top-12 left-6 p-2 bg-emerald-500/10 border border-emerald-500/20 rounded flex items-center gap-2">
                                                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
                                                 <span className="text-emerald-500 font-mono text-[8px] font-black uppercase">Low_Dimension_Mapping: ON</span>
                                             </div>
@@ -497,7 +497,7 @@ export default function App() {
                                         >
                                             <div className="mb-8">
                                                 <div className="text-[9px] text-zinc-500 font-black uppercase tracking-widest mb-1">Target Cluster</div>
-                                                <h4 className="text-xl font-black text-white italic">{selectedData.name}</h4>
+                                                <h4 className="text-xl font-black text-white">{selectedData.name}</h4>
                                                 <div className="text-[9px] font-mono text-zinc-600 mt-1 uppercase">Object_ID: {selectedData.id}</div>
                                             </div>
 
@@ -517,7 +517,7 @@ export default function App() {
                                                         onChange={(e) => updateCluster(selectedData.id, { funding: parseInt(e.target.value) })}
                                                         className="w-full h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
                                                     />
-                                                    <p className="text-[9px] text-zinc-600 leading-tight italic">
+                                                    <p className="text-[9px] text-zinc-600 leading-tight">
                                                         * Increasing resource flow to radical groups reduces global stability but increases atomization in local segments.
                                                     </p>
                                                 </div>
@@ -537,7 +537,7 @@ export default function App() {
                                                         onChange={(e) => updateCluster(selectedData.id, { leverage: parseInt(e.target.value) })}
                                                         className="w-full h-1 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
                                                     />
-                                                    <p className="text-[9px] text-zinc-600 leading-tight italic">
+                                                    <p className="text-[9px] text-zinc-600 leading-tight">
                                                         * Political legacy support buffers against vertical mobilization but creates "Monolith Risks" if exceeding 70%.
                                                     </p>
                                                 </div>
@@ -680,7 +680,7 @@ export default function App() {
                                             Стабильность — это термодинамическая константа, где сумма всех конфликтов и противоречий внутри системы
                                             постоянно приводится к нулю через взаимное поглощение.
                                         </p>
-                                        <div className="mt-6 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-[11px] font-mono text-blue-400/80 leading-relaxed italic">
+                                        <div className="mt-6 p-4 bg-blue-500/5 border border-blue-500/20 rounded-xl text-[11px] font-mono text-blue-400/80 leading-relaxed">
                                             "Разделяй и балансируй. Единство — это иллюзия, за которой скрывается неизбежный распад.
                                             Фрагментация — это реальность, в которой возможен вечный контроль."
                                         </div>
