@@ -138,20 +138,20 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                     // Diameter set by Radius range [10, 150] -> Diameter [20, 300]
                     const nodeSize = 20 + (c.leverage / 100) * 280;
                     const fundingFactor = c.funding / 100;
-                    
+
                     return (
                         <motion.div
                             key={c.id}
                             onClick={() => setSelectedCluster(selectedCluster === c.id ? null : c.id)}
-                            style={{ 
-                                left: c.x, 
+                            style={{
+                                left: c.x,
                                 top: c.y,
                                 position: 'absolute',
                                 zIndex: 30
                             }}
-                            animate={{ 
-                                x: [0, (Math.random() - 0.5) * 15, 0], 
-                                y: [0, (Math.random() - 0.5) * 15, 0] 
+                            animate={{
+                                x: [0, (Math.random() - 0.5) * 15, 0],
+                                y: [0, (Math.random() - 0.5) * 15, 0]
                             }}
                             transition={{ duration: 12 + Math.random() * 6, repeat: Infinity, ease: "easeInOut" }}
                             className="group/node cursor-pointer"
@@ -165,11 +165,10 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                             style={{
                                                 width: `${c.funding * 4}px`,
                                                 height: `${c.funding * 4}px`,
-                                                background: `radial-gradient(circle, ${
-                                                    c.color === 'emerald' ? 'rgba(16,185,129,0.25)' : 
-                                                    c.color === 'red' ? 'rgba(239,68,68,0.25)' : 
-                                                    c.color === 'amber' ? 'rgba(245,158,11,0.25)' : 'rgba(59,130,246,0.25)'
-                                                } 0%, transparent 70%)`,
+                                                background: `radial-gradient(circle, ${c.color === 'emerald' ? 'rgba(16,185,129,0.25)' :
+                                                        c.color === 'red' ? 'rgba(239,68,68,0.25)' :
+                                                            c.color === 'amber' ? 'rgba(245,158,11,0.25)' : 'rgba(59,130,246,0.25)'
+                                                    } 0%, transparent 70%)`,
                                                 position: 'absolute',
                                                 left: 0,
                                                 top: 0,
@@ -178,18 +177,25 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                             className="rounded-full blur-3xl opacity-40"
                                         />
                                         <motion.div
-                                            animate={{ scale: [1, 2], opacity: [0.3, 0] }}
-                                            transition={{ duration: 3, repeat: Infinity }}
-                                            style={{ 
-                                                width: `${nodeSize * 1.4}px`, 
-                                                height: `${nodeSize * 1.4}px`,
+                                            animate={{
+                                                scale: [1, 2.2],
+                                                opacity: [0, 0.25, 0]
+                                            }}
+                                            transition={{
+                                                duration: 4,
+                                                repeat: Infinity,
+                                                ease: "linear"
+                                            }}
+                                            style={{
+                                                width: `${nodeSize * 1.6}px`,
+                                                height: `${nodeSize * 1.6}px`,
                                                 position: 'absolute',
                                                 left: 0,
                                                 top: 0,
                                                 x: "-50%",
                                                 y: "-50%"
                                             }}
-                                            className="rounded-full border border-zinc-700/40"
+                                            className="rounded-full border border-zinc-700/30"
                                         />
                                     </>
                                 )}
@@ -198,8 +204,8 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                 <motion.div
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 15 - fundingFactor * 12, repeat: Infinity, ease: "linear" }}
-                                    style={{ 
-                                        width: `${nodeSize + 16}px`, 
+                                    style={{
+                                        width: `${nodeSize + 16}px`,
                                         height: `${nodeSize + 16}px`,
                                         opacity: 0.1 + fundingFactor * 0.4,
                                         position: 'absolute',
@@ -208,19 +214,18 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                         x: "-50%",
                                         y: "-50%"
                                     }}
-                                    className={`rounded-full border border-dashed flex-shrink-0 aspect-square ${
-                                        c.color === 'blue' ? 'border-blue-400' : 
-                                        c.color === 'amber' ? 'border-amber-400' : 
-                                        c.color === 'red' ? 'border-red-400' : 'border-emerald-400'
-                                    }`}
+                                    className={`rounded-full border border-dashed flex-shrink-0 aspect-square ${c.color === 'blue' ? 'border-blue-400' :
+                                            c.color === 'amber' ? 'border-amber-400' :
+                                                c.color === 'red' ? 'border-red-400' : 'border-emerald-400'
+                                        }`}
                                 />
 
                                 {/* Core Pulse */}
-                                <motion.div 
-                                    style={{ 
-                                        width: `${nodeSize}px`, 
+                                <motion.div
+                                    style={{
+                                        width: `${nodeSize}px`,
                                         height: `${nodeSize}px`,
-                                        boxShadow: selectedCluster === c.id 
+                                        boxShadow: selectedCluster === c.id
                                             ? `0 0 ${30 + fundingFactor * 40}px ${c.color === 'blue' ? 'rgba(37,99,235,0.6)' : c.color === 'amber' ? 'rgba(217,119,6,0.6)' : c.color === 'red' ? 'rgba(220,38,38,0.6)' : 'rgba(5,150,105,0.6)'}`
                                             : `0 0 ${fundingFactor * 20}px ${c.color === 'blue' ? 'rgba(37,99,235,0.4)' : c.color === 'amber' ? 'rgba(217,119,6,0.4)' : c.color === 'red' ? 'rgba(220,38,38,0.4)' : 'rgba(5,150,105,0.4)'}`,
                                         position: 'absolute',
@@ -230,25 +235,26 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                         y: "-50%"
                                     }}
                                     whileHover={{ scale: 1.05 }}
-                                    className={`rounded-full border-2 border-white/20 z-10 transition-all duration-500 flex-shrink-0 aspect-square pointer-events-auto ${
-                                        selectedCluster === c.id ? 'border-white' : ''
-                                    } ${
-                                        c.color === 'blue' ? 'bg-blue-600' : 
-                                        c.color === 'amber' ? 'bg-amber-600' : 
-                                        c.color === 'red' ? 'bg-red-600' : 'bg-emerald-600'
-                                    }`} 
+                                    className={`rounded-full border-2 border-white/20 z-10 transition-all duration-500 flex-shrink-0 aspect-square pointer-events-auto ${selectedCluster === c.id ? 'border-white' : ''
+                                        } ${c.color === 'blue' ? 'bg-blue-600' :
+                                            c.color === 'amber' ? 'bg-amber-600' :
+                                                c.color === 'red' ? 'bg-red-600' : 'bg-emerald-600'
+                                        }`}
                                 />
 
                                 {/* Diverging Ring */}
                                 <motion.div
-                                    key={nodeSize}
-                                    animate={{ 
-                                        scale: [1, 2.4], 
-                                        opacity: [0.4 * (0.5 + fundingFactor * 0.5), 0] 
+                                    animate={{
+                                        scale: [1, 2.5],
+                                        opacity: [0, 0.35, 0]
                                     }}
-                                    transition={{ duration: 3, repeat: Infinity, ease: "easeOut" }}
-                                    style={{ 
-                                        width: `${nodeSize}px`, 
+                                    transition={{
+                                        duration: 3,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                    style={{
+                                        width: `${nodeSize}px`,
                                         height: `${nodeSize}px`,
                                         position: 'absolute',
                                         left: 0,
@@ -256,23 +262,21 @@ export function SimulationCanvas({ activeProtocol, viewMode, clusters, selectedC
                                         x: "-50%",
                                         y: "-50%"
                                     }}
-                                    className={`rounded-full flex-shrink-0 aspect-square z-0 ${
-                                        c.color === 'blue' ? 'bg-blue-500' : 
-                                        c.color === 'amber' ? 'bg-amber-500' : 
-                                        c.color === 'red' ? 'bg-red-500' : 'bg-emerald-500'
-                                    }`}
+                                    className={`rounded-full flex-shrink-0 aspect-square z-0 ${c.color === 'blue' ? 'bg-blue-500' :
+                                            c.color === 'amber' ? 'bg-amber-500' :
+                                                c.color === 'red' ? 'bg-red-500' : 'bg-emerald-500'
+                                        }`}
                                 />
 
                                 {/* Label */}
-                                <div 
+                                <div
                                     className="absolute whitespace-nowrap z-20 pointer-events-none"
                                     style={{ top: `calc(${nodeSize / 2}px + 12px)`, left: '0', transform: 'translateX(-50%)' }}
                                 >
-                                    <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded shadow-xl border transition-colors duration-300 ${
-                                        selectedCluster === c.id 
-                                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' 
+                                    <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded shadow-xl border transition-colors duration-300 ${selectedCluster === c.id
+                                            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500'
                                             : 'bg-zinc-950/80 border-zinc-800 text-zinc-500 group-hover/node:text-zinc-300'
-                                    }`}>
+                                        }`}>
                                         {c.name}
                                     </span>
                                 </div>
