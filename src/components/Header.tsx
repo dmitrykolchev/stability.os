@@ -23,35 +23,35 @@ export function Header({ entropy, lang, setLang }: HeaderProps) {
                     </span>
                 </span>
             </div>
-            
-            <div className="flex items-center gap-8">
-                <div className="flex bg-zinc-900 border border-zinc-800 rounded-full p-0.5 overflow-hidden scale-90">
-                    <button 
-                        onClick={() => setLang('ru')}
-                        className={`px-3 py-1 text-[9px] font-bold rounded-full transition-all ${lang === 'ru' ? 'bg-blue-600 text-white' : 'text-zinc-600 hover:text-zinc-400'}`}
-                    >
-                        RU
-                    </button>
-                    <button 
-                        onClick={() => setLang('en')}
-                        className={`px-3 py-1 text-[9px] font-bold rounded-full transition-all ${lang === 'en' ? 'bg-blue-600 text-white' : 'text-zinc-600 hover:text-zinc-400'}`}
-                    >
-                        EN
-                    </button>
-                </div>
 
-                <div className="hidden md:flex gap-8 text-[10px] uppercase tracking-widest font-semibold text-zinc-400 border-l border-zinc-800 pl-8">
-                    <div className="flex flex-col items-end">
+            <div className="flex items-center gap-8">
+                <div className="hidden md:flex gap-8 text-[10px] uppercase tracking-widest font-semibold text-zinc-400">
+                    <div className="flex flex-col items-end min-w-[120px]">
                         <span className="text-zinc-600 text-[8px] mb-0.5">{lang === 'ru' ? 'Гидравлическая Устойчивость' : 'Hydraulic Stability'}</span>
                         <div className="flex items-center gap-2">
                             <span className={`w-2 h-2 rounded-full ${entropy > 0.85 ? 'bg-emerald-500' : 'bg-amber-500'}`} />
                             INDEX: {(entropy * 100).toFixed(2)}%
                         </div>
                     </div>
-                    <div className="flex flex-col items-end">
+                    <div className="flex flex-col items-end min-w-[100px] border-l border-zinc-800 pl-8">
                         <span className="text-zinc-600 text-[8px] mb-0.5">{lang === 'ru' ? 'Эпоха Симуляции' : 'Simulation Epoch'}</span>
                         <span className="text-zinc-300 font-mono">32.4k_CYCLES</span>
                     </div>
+                </div>
+
+                <div className="flex bg-zinc-900 border border-zinc-800 rounded-full p-0.5 overflow-hidden scale-90 ml-2">
+                    <button
+                        onClick={() => setLang('ru')}
+                        className={`px-3 py-1 text-[9px] font-bold rounded-full transition-all ${lang === 'ru' ? 'bg-blue-600 text-white' : 'text-zinc-600 hover:text-zinc-400'}`}
+                    >
+                        RU
+                    </button>
+                    <button
+                        onClick={() => setLang('en')}
+                        className={`px-3 py-1 text-[9px] font-bold rounded-full transition-all ${lang === 'en' ? 'bg-blue-600 text-white' : 'text-zinc-600 hover:text-zinc-400'}`}
+                    >
+                        EN
+                    </button>
                 </div>
             </div>
         </header>
