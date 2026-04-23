@@ -6,7 +6,7 @@
 
 This contains everything you need to run your app locally.
 
-View your app in browser: [[https://ai.studio/apps/ad5efee5-d887-4ff6-9a0e-44293e59aab4](https://dmitrykolchev.github.io/stability.os/)](https://dmitrykolchev.github.io/stability.os/)
+View your app in browser: [[https://dmitrykolchev.github.io/stability.os/](https://dmitrykolchev.github.io/stability.os/)
 
 ## Run Locally
 
