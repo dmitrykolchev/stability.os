@@ -62,6 +62,22 @@ export default function App() {
     const [selectedCluster, setSelectedCluster] = useState<string | null>(null);
     const [clusters, setClusters] = useState<Cluster[]>(INITIAL_CLUSTERS);
     const [isAboutOpen, setIsAboutOpen] = useState(false);
+    const [lastProtocol, setLastProtocol] = useState('frag');
+
+    // Protocol switch logs
+    useEffect(() => {
+        if (activeProtocol === lastProtocol) return;
+        setLastProtocol(activeProtocol);
+
+        let msg = "";
+        if (activeProtocol === 'unity') msg = "CRIT: Monolith integrity check FAILED. Convergence vulnerability detected.";
+        if (activeProtocol === 'dim_red') msg = "INF: Collapsing social dimensions. State space simplified.";
+        if (activeProtocol === 'frag') msg = "AUTH: Managed Fragmentation verified. Dissipation vectors nominal.";
+
+        if (msg) {
+            setLogs(prev => [...prev.slice(-12), msg]);
+        }
+    }, [activeProtocol, lastProtocol]);
 
     // Dynamic stability calculation logic
     useEffect(() => {
@@ -141,8 +157,8 @@ export default function App() {
                                     key={p.id}
                                     onClick={() => setActiveProtocol(p.id)}
                                     className={`w-full p-3 rounded-lg border transition-all text-left group relative overflow-hidden ${activeProtocol === p.id
-                                            ? 'bg-zinc-900 border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.15)]'
-                                            : 'bg-zinc-900/40 border-zinc-800 text-zinc-500 hover:border-zinc-700'
+                                        ? `bg-zinc-900 ${p.id === 'unity' ? 'border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.2)]' : 'border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.15)]'}`
+                                        : 'bg-zinc-900/40 border-zinc-800 text-zinc-500 hover:border-zinc-700'
                                         }`}
                                 >
                                     <div className="flex items-center justify-between font-medium mb-1 relative z-10">
@@ -150,10 +166,10 @@ export default function App() {
                                             {p.name}
                                         </span>
                                         <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider ${activeProtocol === p.id
-                                                ? 'bg-blue-500 text-white'
-                                                : p.status === 'RUNNING' || p.status === 'ACTIVE'
-                                                    ? 'bg-zinc-800 text-zinc-400 border border-zinc-700'
-                                                    : 'bg-zinc-950 text-zinc-600 border border-zinc-800'
+                                            ? 'bg-blue-500 text-white'
+                                            : p.status === 'RUNNING' || p.status === 'ACTIVE'
+                                                ? 'bg-zinc-800 text-zinc-400 border border-zinc-700'
+                                                : 'bg-zinc-950 text-zinc-600 border border-zinc-800'
                                             }`}>
                                             {p.status}
                                         </span>
@@ -178,8 +194,8 @@ export default function App() {
                                     key={mode.id}
                                     onClick={() => setViewMode(mode.id as any)}
                                     className={`flex items-center gap-3 p-3 rounded-lg border text-xs font-bold uppercase tracking-wider transition-all ${viewMode === mode.id
-                                            ? 'bg-zinc-800 border-zinc-700 text-zinc-100'
-                                            : 'bg-zinc-950/20 border-transparent text-zinc-600 hover:text-zinc-400'
+                                        ? 'bg-zinc-800 border-zinc-700 text-zinc-100'
+                                        : 'bg-zinc-950/20 border-transparent text-zinc-600 hover:text-zinc-400'
                                         }`}
                                 >
                                     <mode.icon size={14} className={viewMode === mode.id ? 'text-blue-500' : ''} />
@@ -271,7 +287,11 @@ export default function App() {
                             </div>
 
                             {/* Simulation Canvas */}
-                            <div className="flex-1 relative overflow-hidden bg-black/40">
+                            <motion.div
+                                animate={activeProtocol === 'unity' ? { x: [-1, 1, -1], y: [1, -1, 1] } : {}}
+                                transition={{ repeat: Infinity, duration: 0.1 }}
+                                className="flex-1 relative overflow-hidden bg-black/40"
+                            >
                                 {/* Background Noise/Grid */}
                                 <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
 
@@ -322,6 +342,61 @@ export default function App() {
                                             <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
                                                 <div className="w-full h-px bg-zinc-800" />
                                                 <div className="h-full w-px bg-zinc-800" />
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
+                                {/* Interface Effects for Protocols */}
+                                <AnimatePresence>
+                                    {activeProtocol === 'unity' && (
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            className="absolute inset-0 z-40 bg-red-950/20 pointer-events-none border-4 border-red-500/20 flex flex-col items-center justify-center overflow-hidden"
+                                        >
+                                            <motion.div
+                                                animate={{ opacity: [1, 0.4, 1], scale: [1, 1.05, 1] }}
+                                                transition={{ duration: 0.1, repeat: Infinity }}
+                                                className="bg-black/80 px-10 py-4 border border-red-500 shadow-[0_0_50px_rgba(239,68,68,0.3)] flex flex-col items-center gap-2"
+                                            >
+                                                <AlertTriangle size={32} className="text-red-500 animate-pulse" />
+                                                <span className="text-red-500 font-mono text-lg font-black uppercase tracking-[0.4em]">
+                                                    CRITICAL_RISK: MONOLITH_PROTOCOL
+                                                </span>
+                                                <span className="text-red-500/60 font-mono text-[8px] uppercase tracking-widest text-center">
+                                                    Unity detected. Fragmentation integrity compromised.<br />System instability approaching terminal value.
+                                                </span>
+                                            </motion.div>
+                                            <div className="absolute inset-0 opacity-10 pointer-events-none">
+                                                {Array.from({ length: 8 }).map((_, i) => (
+                                                    <motion.div
+                                                        key={i}
+                                                        animate={{ top: ['0%', '100%'], opacity: [0, 1, 0] }}
+                                                        transition={{ duration: Math.random() + 0.3, repeat: Infinity, delay: Math.random() }}
+                                                        className="absolute w-full h-[2px] bg-red-400 shadow-[0_0_15px_red]"
+                                                    />
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+
+                                    {activeProtocol === 'dim_red' && (
+                                        <motion.div
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            className="absolute inset-0 z-40 pointer-events-none mix-blend-overlay"
+                                        >
+                                            <div className="absolute inset-0 bg-blue-500/5 backdrop-blur-[1px]" />
+                                            <div className="absolute inset-0 opacity-30" style={{
+                                                backgroundImage: 'repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,1) 3px, rgba(0,0,0,1) 4px)',
+                                                backgroundSize: '100% 4px'
+                                            }} />
+                                            <div className="absolute top-4 left-4 p-2 bg-emerald-500/10 border border-emerald-500/20 rounded flex items-center gap-2">
+                                                <div className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+                                                <span className="text-emerald-500 font-mono text-[8px] font-black uppercase">Low_Dimension_Mapping: ON</span>
                                             </div>
                                         </motion.div>
                                     )}
@@ -397,7 +472,7 @@ export default function App() {
                                     <div>DISSIPATION: ENABLED</div>
                                     <div>FEEDBACK_LOOP: SHIELDED</div>
                                 </div>
-                            </div>
+                            </motion.div>
                         </section>
 
                         {/* Right Column: Group Modulator (The Functional Part) */}
