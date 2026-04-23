@@ -6,7 +6,7 @@
 
 This contains everything you need to run your app locally.
 
-View your app in browser: [[https://dmitrykolchev.github.io/stability.os/](https://dmitrykolchev.github.io/stability.os/)
+View your app in browser: [https://dmitrykolchev.github.io/stability.os/](https://dmitrykolchev.github.io/stability.os/)
 
 ## Run Locally
 
