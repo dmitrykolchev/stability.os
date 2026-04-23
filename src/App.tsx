@@ -501,8 +501,8 @@ export default function App() {
                     <Shield size={32} className="text-blue-500 opacity-50" />
                   </motion.div>
                   <div>
-                    <h1 className="text-2xl font-black italic uppercase tracking-tighter text-white">Stability_OS: Manifesto_0x01</h1>
-                    <p className="text-[10px] font-mono text-zinc-500">CLASSIFCATION: EYES_ONLY // HYPERVISOR_PROTOCOL</p>
+                    <h1 className="text-2xl font-black uppercase tracking-tighter text-zinc-300">Stability_OS: Manifesto_0x002A</h1>
+                    <p className="text-[10px] font-mono text-zinc-500">CLASSIFCATION: EYES_ONLY // HYPERVISOR_UNREALITY_PROTOCOL</p>
                   </div>
                 </div>
                 <button 
@@ -579,8 +579,8 @@ export default function App() {
               </div>
 
               <div className="mt-20 pt-8 border-t border-zinc-900 flex justify-between items-center text-[9px] font-mono text-zinc-600 uppercase tracking-widest">
-                <span>Created: Epoch_Zero</span>
-                <span>System_Hash: a7f8-9921-bc01</span>
+                <span>Created: DIVISION_BY_ZERO</span>
+                <span>System_Hash: 7b502c3a1f48c8609ae212cdfb639dee39673f5e</span>
                 <span className="text-blue-900 font-black">Ad_Victoria_Stabilitas</span>
               </div>
             </div>
