@@ -12,8 +12,12 @@ View your app in browser: [https://dmitrykolchev.github.io/stability.os/](https:
 
 **Prerequisites:**  Node.js
 
-
-1. Install dependencies:
+1. Clone repository
+   `git clone https://github.com/dmitrykolchev/stability.os.git`
+   `cd stability.os`
+3. Install dependencies:
    `npm install`
-3. Run the app:
+4. Run the app:
    `npm run dev`
+
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/0da9088b-6fd0-4ccf-afd7-e1434f6c8da7" />
