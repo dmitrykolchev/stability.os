@@ -502,7 +502,7 @@ export default function App() {
                   </motion.div>
                   <div>
                     <h1 className="text-2xl font-black uppercase tracking-tighter text-zinc-300">Stability_OS: Manifesto_0x002A</h1>
-                    <p className="text-[10px] font-mono text-zinc-500">CLASSIFCATION: EYES_ONLY // HYPERVISOR_UNREALITY_PROTOCOL</p>
+                    <p className="text-[10px] font-mono text-zinc-500">CLASSIFCATION: EYES_ONLY // HYPERVISOR_UNREALITY_SIMULATION_PROTOCOL</p>
                   </div>
                 </div>
                 <button 
