@@ -20,5 +20,5 @@ View your app in browser: [https://dmitrykolchev.github.io/stability.os/](https:
 4. Run the app:
    `npm run dev`
 
-<img width="1200" alt="image" src="https://github.com/user-attachments/assets/1d7d549d-e65f-4ec4-be03-c7451f2f2143" />
+<img width="1200" alt="image" src="https://github.com/user-attachments/assets/5a7d08f7-e6d5-4fcd-b0fa-6bf89bc49061" />
 
