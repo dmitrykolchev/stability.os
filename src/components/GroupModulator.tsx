@@ -41,7 +41,7 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
                                     <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest">
                                         <div className="flex items-center gap-2">
                                             <RefreshCcw size={12} className="text-zinc-500" />
-                                            {lang === 'ru' ? 'Fin_Распределение' : 'Financial_Allocation'}
+                                            {lang === 'ru' ? 'Финансовые_Ресурсы' : 'Financial_Allocation'}
                                         </div>
                                         <span className="text-blue-500 font-mono">{selectedData.funding}%</span>
                                     </div>
@@ -62,7 +62,7 @@ export function GroupModulator({ selectedData, setSelectedCluster, updateCluster
                                     <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-widest">
                                         <div className="flex items-center gap-2">
                                             <Shield size={12} className="text-zinc-500" />
-                                            {lang === 'ru' ? 'Pol_Влияние' : 'Political_Leverage'}
+                                            {lang === 'ru' ? 'Политическое_Влияние' : 'Political_Leverage'}
                                         </div>
                                         <span className="text-emerald-500 font-mono">{selectedData.leverage}%</span>
                                     </div>
