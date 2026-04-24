@@ -2,7 +2,7 @@
 <img width="1200" height="675" alt="eagle-bw" src="https://github.com/user-attachments/assets/26500e39-90a1-4cab-9f1e-09b0c09ec59f" />
 </div>
 
-# Run and deploy your Statility.OS
+# Run and deploy your Stability for React
 
 This contains everything you need to run your app locally.
 
